@@ -1,6 +1,7 @@
 package company;
 
 import company.menu.BooksMenu;
+import company.menu.StudentMenu;
 
 public class Main {
 
