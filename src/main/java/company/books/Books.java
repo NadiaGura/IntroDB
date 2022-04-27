@@ -9,6 +9,11 @@ public class Books {
     private String name;
     private int price;
 
+    // empty constructor
+    public Books() {
+
+    }
+
     //constructor
     public Books(int id, String name, int price) {
         this.id = id;

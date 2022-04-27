@@ -13,6 +13,7 @@ public class StudentMenu {
         System.out.println("2. Delete student.");
         System.out.println("3. Change student name.");
         System.out.println("4. Change student age.");
+        System.out.println("5. Get student by ID.");
 
         System.out.println("Select an option: ");
         int option = sc.nextInt();
@@ -29,6 +30,9 @@ public class StudentMenu {
                 break;
             case  4:
                 StudentController.editStudentAge();
+                break;
+            case  5:
+                System.out.println(StudentController.getStudentById().getName());
                 break;
             default:
                 System.out.println("Invalid option try again.");

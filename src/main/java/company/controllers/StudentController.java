@@ -1,5 +1,7 @@
 package company.controllers;
 
+import company.objects.Students;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -73,7 +75,7 @@ public class StudentController {
     }
 
     //method to edit student age
-    
+
     public  static boolean editStudentAge(){
         //prompt the user for data
         System.out.println("Enter the name of the student you would like to edit age for : ");
@@ -90,6 +92,40 @@ public class StudentController {
         }catch (SQLException ex){
             ex.printStackTrace();
             return false;
+        }
+    }
+
+    //GET STUDENT BY ID CONTROLLER
+    public static Students getStudentById(){
+        //promt user to enter the ID od the student they want to return
+        System.out.println("Enter the ID of the Student");
+        int id = sc.nextInt();
+
+        try{
+            ps = getConnection().prepareStatement("SELECT * FROM students WHERE id = "+ id);
+            rs = ps.executeQuery();
+
+            //define var to temporarily hold each field in the result set.
+            int studid,age;
+            String name;
+
+            //instantiate the student objet to return at the end of the method execution
+            Students student1 = new Students();
+
+            //loop through the result set and add the necessary values in the student object
+            while (rs.next()){
+                studid = rs.getInt("id");
+                name = rs.getString("name");
+                age = rs.getInt("age");
+                student1.setName(name);
+                student1.setId(studid);
+                student1.setAge(age);
+            }
+            return student1;
+
+        }catch (SQLException e){
+            e.printStackTrace();
+            return null;
         }
     }
     }

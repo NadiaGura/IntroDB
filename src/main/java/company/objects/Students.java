@@ -36,8 +36,10 @@ public class Students {
         return age;
     }
 
+//empty constructor
+public Students(){
 
-
+}
     //constructor
     public Students(int id, String name, int age){
         this.id = id;

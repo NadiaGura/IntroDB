@@ -1,5 +1,8 @@
 package company.controllers;
 
+import company.books.Books;
+import company.objects.Students;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,7 +34,7 @@ public class BookController {
             ps2.execute(); //execute the sql command
             return true; //return true if successful
         } catch (SQLException ex2) {
-            ex2.printStackTrace();
+            System.out.println("Database Error!");
             return false;
         }
     }
@@ -94,6 +97,39 @@ public class BookController {
         }catch (SQLException ex2){
             ex2.printStackTrace();
             return false;
+        }
+    }
+    //GET STUDENT BY ID CONTROLLER
+    public static Books getBookById(){
+        //promt user to enter the ID od the student they want to return
+        System.out.println("Enter the ID of the Book.");
+        int idBook = sc2.nextInt();
+
+        try{
+            ps2 = getConnection().prepareStatement("SELECT * FROM books WHERE id = "+ idBook);
+            rs2 = ps2.executeQuery();
+
+            //define var to temporarily hold each field in the result set.
+            int bookid,price;
+            String name;
+
+            //instantiate the student objet to return at the end of the method execution
+            Books books1 = new Books();
+
+            //loop through the result set and add the necessary values in the student object
+            while (rs2.next()){
+                bookid = rs2.getInt("id");
+                name = rs2.getString("name");
+                price = rs2.getInt("price");
+                books1.setName(name);
+                books1.setId(bookid);
+                books1.setPrice(price);
+            }
+            return books1;
+
+        }catch (SQLException ex){
+            ex.printStackTrace();
+            return null;
         }
     }
 }

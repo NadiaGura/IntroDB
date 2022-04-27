@@ -34,7 +34,7 @@ public class Main {
 
         List<String> bookNames = new ArrayList<>();
 
-        //if book price i sless than 5, remove book from the List
+        //if book price is less than 5, remove book from the List
         for (int i = 0; i < books.size(); i++) {
             if (books.get(i).getPrice() < 5) books.remove(books.get(i));
         }
