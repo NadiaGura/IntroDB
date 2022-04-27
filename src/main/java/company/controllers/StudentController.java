@@ -16,8 +16,9 @@ public class StudentController {
     private static PreparedStatement ps;
     private static ResultSet rs;
 
-    //Add student controller
-    public  static boolean addStudent() {
+    //METHOD TO ADD STUDENT
+
+    public static boolean addStudent() {
         //prompt the user for data
         System.out.println("Enter the name of the student : ");
         String name = sc.next();
@@ -32,88 +33,92 @@ public class StudentController {
             ps.execute(); //execute the sql command
             return true; //return true if successful
         } catch (SQLException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             return false;
         }
     }
 
-            //method to delete student
-    public  static boolean deleteStudent(){
+    //METHOD TO DELETE STUDENT
+
+    public static boolean deleteStudent() {
         //prompt the user for data
         System.out.println("Enter the name of the student you would like to delete : ");
         String name2 = sc.next();
 
-        try{
+        try {
             //DELETE FROM students WHERE name = name;
             ps = getConnection().prepareStatement("DELETE FROM students WHERE name = '" + name2 + "' ");
 
             ps.execute(); //execute the sql command
             return true; //return true if successful
-        }catch (SQLException ex){
-            ex.printStackTrace();
+        } catch (SQLException ex) {
+            //ex.printStackTrace();
             return false;
         }
-        }
-    //method to edit student name
-    public  static boolean editStudentName(){
+    }
+
+    //METHOD TO EDIT STUDENTS NAME
+
+    public static boolean editStudentName() {
         //prompt the user for data
         System.out.println("Enter the name of the student you would like to edit : ");
         String name3 = sc.next();
         System.out.println("Enter name you would like to add : ");
         String name4 = sc.next();
 
-        try{
+        try {
             //UPDATE students set name = 'newName' where name = 'oldName';
-            ps = getConnection().prepareStatement("UPDATE students set name = '" + name4 + "' WHERE name = '"+ name3 + "'");
+            ps = getConnection().prepareStatement("UPDATE students set name = '" + name4 + "' WHERE name = '" + name3 + "'");
 
             ps.execute(); //execute the sql command
             return true; //return true if successful
-        }catch (SQLException ex){
-            ex.printStackTrace();
+        } catch (SQLException ex) {
+            //ex.printStackTrace();
             return false;
         }
     }
 
-    //method to edit student age
+    //METHOD TO EDIT STUDENTS AGE
 
-    public  static boolean editStudentAge(){
+    public static boolean editStudentAge() {
         //prompt the user for data
         System.out.println("Enter the name of the student you would like to edit age for : ");
         String stName = sc.next();
         System.out.println("Enter age you would like to add : ");
         String newAge = sc.next();
 
-        try{
+        try {
             //UPDATE students set age = 'newAge' where name = 'stName';
-            ps = getConnection().prepareStatement("UPDATE students set age = '" + newAge + "' WHERE name = '"+ stName + "'");
+            ps = getConnection().prepareStatement("UPDATE students set age = '" + newAge + "' WHERE name = '" + stName + "'");
 
             ps.execute(); //execute the sql command
             return true; //return true if successful
-        }catch (SQLException ex){
-            ex.printStackTrace();
+        } catch (SQLException ex) {
+            //ex.printStackTrace();
             return false;
         }
     }
 
-    //GET STUDENT BY ID CONTROLLER
-    public static Students getStudentById(){
+    //METHOD TO GET STUDENT BY ID CONTROLLER
+
+    public static Students getStudentById() {
         //promt user to enter the ID od the student they want to return
         System.out.println("Enter the ID of the Student");
         int id = sc.nextInt();
 
-        try{
-            ps = getConnection().prepareStatement("SELECT * FROM students WHERE id = "+ id);
+        try {
+            ps = getConnection().prepareStatement("SELECT * FROM students WHERE id = " + id);
             rs = ps.executeQuery();
 
             //define var to temporarily hold each field in the result set.
-            int studid,age;
+            int studid, age;
             String name;
 
             //instantiate the student objet to return at the end of the method execution
             Students student1 = new Students();
 
             //loop through the result set and add the necessary values in the student object
-            while (rs.next()){
+            while (rs.next()) {
                 studid = rs.getInt("id");
                 name = rs.getString("name");
                 age = rs.getInt("age");
@@ -123,10 +128,10 @@ public class StudentController {
             }
             return student1;
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
     }
-    }
+}
 

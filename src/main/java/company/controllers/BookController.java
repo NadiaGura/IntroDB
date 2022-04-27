@@ -19,7 +19,7 @@ public class BookController {
 
     //METHOD TO ADD BOOK
 
-    public  static boolean addBook() {
+    public static boolean addBook() {
         //prompt the user for data
         System.out.println("Enter name of the Book : ");
         String bookName = sc2.nextLine();
@@ -41,83 +41,85 @@ public class BookController {
 
     //METHOD TO DELETE BOOK
 
-    public  static boolean deleteBook(){
+    public static boolean deleteBook() {
         //prompt the user for data
         System.out.println("Enter the name of the Book you would like to delete : ");
         String bookName2 = sc2.next();
 
-        try{
+        try {
             //DELETE FROM books WHERE name = 'name';
             ps2 = getConnection().prepareStatement("DELETE FROM books WHERE name = '" + bookName2 + "'");
 
             ps2.execute(); //execute the sql command
             return true; //return true if successful
-        }catch (SQLException ex2){
-            ex2.printStackTrace();
+        } catch (SQLException ex2) {
+            //ex2.printStackTrace();
             return false;
         }
     }
 
     //METHOD TO EDIT BOOKS NAME
 
-    public  static boolean editBookName(){
+    public static boolean editBookName() {
         //prompt the user for data
         System.out.println("Enter the name of the Book you would like to edit : ");
         String oldBookName = sc2.next();
         System.out.println("Enter name you would like to add : ");
         String newNookName = sc2.next();
 
-        try{
+        try {
             //UPDATE books set name = 'newName' where name = 'oldName';
-            ps2 = getConnection().prepareStatement("UPDATE books set name = '" + newNookName + "' WHERE name = '"+ oldBookName + "'");
+            ps2 = getConnection().prepareStatement("UPDATE books set name = '" + newNookName + "' WHERE name = '" + oldBookName + "'");
 
             ps2.execute(); //execute the sql command
             return true; //return true if successful
-        }catch (SQLException ex2){
-            ex2.printStackTrace();
+        } catch (SQLException ex2) {
+            //ex2.printStackTrace();
             return false;
         }
     }
 
     //METHOD EDIT PRICE IN BOOKS
 
-    public  static boolean editBookPrice(){
+    public static boolean editBookPrice() {
         //prompt the user for data
         System.out.println("Enter the name of the Book you would like to change price for : ");
         String bName = sc2.next();
         System.out.println("Enter new price : ");
         String newPrice = sc2.next();
 
-        try{
+        try {
             //UPDATE books set price = new Price where name = 'stName';
-            ps2 = getConnection().prepareStatement("UPDATE books set price = " + newPrice + " WHERE name = '"+ bName + "'");
+            ps2 = getConnection().prepareStatement("UPDATE books set price = " + newPrice + " WHERE name = '" + bName + "'");
 
             ps2.execute(); //execute the sql command
             return true; //return true if successful
-        }catch (SQLException ex2){
-            ex2.printStackTrace();
+        } catch (SQLException ex2) {
+            //ex2.printStackTrace();
             return false;
         }
     }
+
     //GET STUDENT BY ID CONTROLLER
-    public static Books getBookById(){
+
+    public static Books getBookById() {
         //promt user to enter the ID od the student they want to return
         System.out.println("Enter the ID of the Book.");
         int idBook = sc2.nextInt();
 
-        try{
-            ps2 = getConnection().prepareStatement("SELECT * FROM books WHERE id = "+ idBook);
+        try {
+            ps2 = getConnection().prepareStatement("SELECT * FROM books WHERE id = " + idBook);
             rs2 = ps2.executeQuery();
 
             //define var to temporarily hold each field in the result set.
-            int bookid,price;
+            int bookid, price;
             String name;
 
             //instantiate the student objet to return at the end of the method execution
             Books books1 = new Books();
 
             //loop through the result set and add the necessary values in the student object
-            while (rs2.next()){
+            while (rs2.next()) {
                 bookid = rs2.getInt("id");
                 name = rs2.getString("name");
                 price = rs2.getInt("price");
@@ -127,7 +129,7 @@ public class BookController {
             }
             return books1;
 
-        }catch (SQLException ex){
+        } catch (SQLException ex) {
             ex.printStackTrace();
             return null;
         }

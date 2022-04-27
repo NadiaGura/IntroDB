@@ -23,7 +23,6 @@ public class Students {
     }
 
 
-
     public int getId() {
         return id;
     }
@@ -36,15 +35,16 @@ public class Students {
         return age;
     }
 
-//empty constructor
-public Students(){
+    //empty constructor
+    public Students() {
 
-}
+    }
+
     //constructor
-    public Students(int id, String name, int age){
+    public Students(int id, String name, int age) {
         this.id = id;
         this.name = name;
-        this.age =- age;
+        this.age = -age;
     }
 
 }
