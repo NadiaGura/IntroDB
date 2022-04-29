@@ -1,6 +1,7 @@
 package company;
 
 import company.menu.BooksMenu;
+import company.menu.ScoresMenu;
 import company.menu.StudentMenu;
 
 public class Main {
@@ -10,9 +11,9 @@ public class Main {
         //connection
         //DBConnection.getConnection();
 
-        //StudentMenu.menu();
-        BooksMenu.menu2();
-
+        StudentMenu.menu();
+        //BooksMenu.menu2();
+        //ScoresMenu.menu();
 
 
 /*

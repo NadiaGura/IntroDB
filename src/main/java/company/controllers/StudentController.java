@@ -15,6 +15,7 @@ public class StudentController {
     private static Scanner sc = new Scanner(System.in);
     private static PreparedStatement ps;
     private static ResultSet rs;
+    //int id;
 
     //METHOD TO ADD STUDENT
 
@@ -38,16 +39,16 @@ public class StudentController {
         }
     }
 
-    //METHOD TO DELETE STUDENT
+    //METHOD TO DELETE STUDENT BY ID/NAME
 
     public static boolean deleteStudent() {
-        //prompt the user for data
-        System.out.println("Enter the name of the student you would like to delete : ");
-        String name2 = sc.next();
+        //prompt user for data
+        System.out.println("Enter id of the student you would like to delete : ");
+        int id = sc.nextInt();
 
         try {
             //DELETE FROM students WHERE name = name;
-            ps = getConnection().prepareStatement("DELETE FROM students WHERE name = '" + name2 + "' ");
+            ps = getConnection().prepareStatement("DELETE FROM students WHERE id = " + id);
 
             ps.execute(); //execute the sql command
             return true; //return true if successful
@@ -56,6 +57,29 @@ public class StudentController {
             return false;
         }
     }
+
+    //METHOD TO DELETE STUDENT OVERLOADING WITH DELETING SCORE DATA AND STUDENT DATA
+
+    public static boolean deleteStudent(int id) {
+
+        //deleteStudent() method overloading with recursive call
+//        StudentController.deleteScore();
+//        StudentController.deleteStudent();
+
+        StudentController.deleteScore();
+
+        try {
+            //DELETE FROM students WHERE name = name;
+            ps = getConnection().prepareStatement("DELETE FROM students WHERE id = " + id);
+
+            ps.execute(); //execute the sql command
+            return true; //return true if successful
+        } catch (SQLException ex) {
+            return false;
+        }
+       //return true;
+    }
+
 
     //METHOD TO EDIT STUDENTS NAME
 
@@ -132,6 +156,73 @@ public class StudentController {
             e.printStackTrace();
             return null;
         }
+    }
+
+//METHOD TO ADD SCORES TO STUDENT BY ID
+    public static boolean addScores(){
+        System.out.println("Enter id of the Student: ");
+        int studentId = sc.nextInt();
+
+        System.out.println("Enter scores for Math: ");
+        int mathScore = sc.nextInt();
+        System.out.println("Enter scores for English: ");
+        int engScore = sc.nextInt();
+        System.out.println("Enter scores for Physics: ");
+        int physScore = sc.nextInt();
+        System.out.println("Enter scores for Chemistry: ");
+        int chemScore = sc.nextInt();
+
+        try {
+            //INSERT INTO scores(studentid,mathematics,english,physics,chemistry)VALUES(idValues, scoresValues);
+            ps = getConnection().prepareStatement("INSERT INTO scores(studentid,mathematics,english,physics,chemistry)VALUES(" + studentId + "," + mathScore + "," + engScore + "," + physScore + "," + chemScore + ")");
+
+            ps.execute(); //execute the sql command
+            return true; //return true if successful
+        } catch (SQLException ex2) {
+            System.out.println("Database Error!");
+            return false;
+        }
+    }
+
+    //METHOD TO DELETE STUDENT (delete particular student scores by id)
+
+    public static boolean deleteScore() {
+        //prompt the user for data
+        System.out.println("Enter students id: ");
+        int id = sc.nextInt();
+
+        try {
+            //DELETE FROM scores WHERE id = idEntered;
+            ps = getConnection().prepareStatement("DELETE from scores WHERE studentid =" + id);
+
+            ps.execute(); //execute the sql command
+            return true; //return true if successful
+        } catch (SQLException ex) {
+            //ex.printStackTrace();
+            return false;
+        }
+    }
+
+    //OVERLOADED deleteScore() WILL DELETE STUDENT AFTER SCORES ARE DELETED
+
+    public static boolean deleteScore(int id) {
+
+        //deleteScore() method overloading with recursive call
+
+//        ScoresController.deleteScores();
+//        StudentController.deleteStudent();
+
+
+        try {
+            //DELETE FROM students WHERE id = id;
+            ps = getConnection().prepareStatement("DELETE FROM scores WHERE studentid = " + id);
+            ps.execute(); //execute the sql command
+            StudentController.deleteStudent();
+            return true; //return true if successful
+        } catch (SQLException ex) {
+            return false;
+        }
+       // return true;
     }
 }
 
