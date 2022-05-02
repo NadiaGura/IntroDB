@@ -1,19 +1,23 @@
 package company;
 
+import company.menu.AuthMenu;
 import company.menu.BooksMenu;
 import company.menu.ScoresMenu;
 import company.menu.StudentMenu;
 
+import java.sql.SQLException;
+
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
 
         //connection
         //DBConnection.getConnection();
 
-        StudentMenu.menu();
-        //BooksMenu.menu2();
+        //StudentMenu.menu();
+        //BooksMenu.menu();
         //ScoresMenu.menu();
+        AuthMenu.menu();
 
 
 /*

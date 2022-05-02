@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class BooksMenu {
 
-    public static void menu2() {
+    public static void menu() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("What do you want to do?: ");
         System.out.println("1. Add new Book.");
@@ -14,6 +14,10 @@ public class BooksMenu {
         System.out.println("3. Change Book name.");
         System.out.println("4. Change Book price.");
         System.out.println("5. Get Book by ID.");
+        System.out.println("6. Add author by ID/Name.");
+        System.out.println("7. Delete author by ID/Name.");
+        System.out.println("8. Update author by ID/Name.");
+        System.out.println("9. Get Author by Book ID.");
 
         System.out.println("Select an option: ");
         int option2 = scanner.nextInt();
@@ -34,9 +38,21 @@ public class BooksMenu {
             case 5:
                 System.out.println(BookController.getBookById().getName());
                 break;
+            case 6:
+                System.out.println(BookController.addAuthor()? "Successfully added books Author." : "Author not added!");
+                break;
+            case 7:
+                System.out.println(BookController.deleteAuthor()? "Successfully deleted books Author." : "Author not deleted!");
+                break;
+            case 8:
+                System.out.println(BookController.editAuthors()? "Successfully edited books Author." : "Authors name not edited!");
+                break;
+            case 9:
+                System.out.println(BookController.getAuthorById().getName());
+                break;
             default:
                 System.out.println("Invalid option try again.");
-                menu2();
+                menu();
         }
     }
 }

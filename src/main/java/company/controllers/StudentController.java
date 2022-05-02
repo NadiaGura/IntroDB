@@ -63,10 +63,10 @@ public class StudentController {
     public static boolean deleteStudent(int id) {
 
         //deleteStudent() method overloading with recursive call
-//        StudentController.deleteScore();
-//        StudentController.deleteStudent();
+//        deleteScore();
+//        deleteStudent();
 
-        StudentController.deleteScore();
+        deleteScore();
 
         try {
             //DELETE FROM students WHERE name = name;
@@ -205,24 +205,39 @@ public class StudentController {
 
     //OVERLOADED deleteScore() WILL DELETE STUDENT AFTER SCORES ARE DELETED
 
-    public static boolean deleteScore(int id) {
+//    public static boolean deleteScore(int id) {
+//
+//        //deleteScore() method overloading with recursive call
+//
+////       deleteScores();
+////       deleteStudent();
+//
+//
+//        try {
+//            //DELETE FROM students WHERE id = id;
+//            ps = getConnection().prepareStatement("DELETE FROM scores WHERE studentid = " + id);
+//            ps.execute(); //execute the sql command
+//            deleteStudent();
+//            return true; //return true if successful
+//        } catch (SQLException ex) {
+//            return false;
+//        }
+//       // return true;
+//    }
 
-        //deleteScore() method overloading with recursive call
+    //deleteScore(overloading)
+public static boolean deleteScore(int id) {
+    //prompt the user for data
+    try {
+        //DELETE FROM scores WHERE id = idEntered;
+        ps = getConnection().prepareStatement("DELETE from scores WHERE studentid =" + id);
 
-//        ScoresController.deleteScores();
-//        StudentController.deleteStudent();
-
-
-        try {
-            //DELETE FROM students WHERE id = id;
-            ps = getConnection().prepareStatement("DELETE FROM scores WHERE studentid = " + id);
-            ps.execute(); //execute the sql command
-            StudentController.deleteStudent();
-            return true; //return true if successful
-        } catch (SQLException ex) {
-            return false;
-        }
-       // return true;
+        ps.execute(); //execute the sql command
+        return true; //return true if successful
+    } catch (SQLException ex) {
+        //ex.printStackTrace();
+        return false;
     }
+}
 }
 
